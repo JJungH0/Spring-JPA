@@ -16,8 +16,12 @@
 
             <!-- Hibernate 설정 -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+<!--            DDL 자동 생성-->
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+<!--            콘솔에서 실행되는 테이블 DDL 보기 가능-->
             <property name="hibernate.show_sql" value="true"/>
+<!--            테이블 명이나 컬럼 명이 생략되면 자바의 카멜 표기법을 테이블의 언더스코어 표기법으로 매핑-->
+            <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
             <property name="hibernate.format_sql" value="true"/>
         </properties>
     </persistence-unit>

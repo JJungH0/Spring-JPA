@@ -61,6 +61,9 @@ public class JpaMain {
         Member findMember = em.find(Member.class, id);
         log.info("findMember = {}", findMember);
 
+        // 1차 캐시 동일성 테스트
+        Member findMember2 = em.find(Member.class, "id1");
+        log.info("result = {}", findMember == findMember2);
         /**
          * JPQL 실행 :
          * - flush()를 먼저 수행
