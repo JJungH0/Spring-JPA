@@ -5,7 +5,21 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <!-- 엔티티 클래스 -->
-        <class>study.jpa.jpabook.start.Member</class>
+<!--        <class>study.jpa.jpabook.start.Member</class>-->
+<!--        <class>study.jpa.jpabook.model.puremapping.Member</class>-->
+<!--        <class>study.jpa.jpabook.model.puremapping.Team</class>-->
+<!--        <class>study.jpa.jpabook.model.entity.Order</class>-->
+<!--        <class>study.jpa.jpabook.model.entity.Item</class>-->
+<!--        <class>study.jpa.jpabook.model.entity.OrderItem</class>-->
+<!--        <class>study.jpa.jpabook.model.entity.Member</class>-->
+<!--        <class>study.jpa.jpabook.chap6.onetoone.twoway.Member</class>-->
+<!--        <class>study.jpa.jpabook.chap6.onetoone.twoway.Locker</class>-->
+<!--        <class>study.jpa.jpabook.chap6.manytomany.onetwoway.Member</class>-->
+<!--        <class>study.jpa.jpabook.chap6.manytomany.onetwoway.Product</class>-->
+<!--        <class>study.jpa.jpabook.chap6.manytomany.onetwoway.MemberProduct</class>-->
+        <class>study.jpa.jpabook.chap6.manytomany.onetwoway2.Product</class>
+        <class>study.jpa.jpabook.chap6.manytomany.onetwoway2.Member</class>
+        <class>study.jpa.jpabook.chap6.manytomany.onetwoway2.Order</class>
 
         <!-- DB 연결 설정 -->
         <properties>
