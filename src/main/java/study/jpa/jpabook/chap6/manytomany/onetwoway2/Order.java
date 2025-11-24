@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
-@Entity
+//@Entity
 @NoArgsConstructor
 @Data
 @Table(name = "Orders")
