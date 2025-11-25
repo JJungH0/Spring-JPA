@@ -5,12 +5,39 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <!-- 엔티티 클래스 -->
-        <class>study.jpa.jpabook.start.Member</class>
-
+<!--        <class>study.jpa.jpabook.start.Member</class>-->
+<!--        <class>study.jpa.jpabook.model.puremapping.Member</class>-->
+<!--        <class>study.jpa.jpabook.model.puremapping.Team</class>-->
+<!--        <class>study.jpa.jpabook.model.entity.Order</class>-->
+<!--        <class>study.jpa.jpabook.model.entity.Item</class>-->
+<!--        <class>study.jpa.jpabook.model.entity.OrderItem</class>-->
+<!--        <class>study.jpa.jpabook.model.entity.Member</class>-->
+<!--        <class>study.jpa.jpabook.chap6.onetoone.twoway.Member</class>-->
+<!--        <class>study.jpa.jpabook.chap6.onetoone.twoway.Locker</class>-->
+<!--        <class>study.jpa.jpabook.chap6.manytomany.onetwoway.Member</class>-->
+<!--        <class>study.jpa.jpabook.chap6.manytomany.onetwoway.Product</class>-->
+<!--        <class>study.jpa.jpabook.chap6.manytomany.onetwoway.MemberProduct</class>-->
+<!--        <class>study.jpa.jpabook.chap6.manytomany.onetwoway2.Product</class>-->
+<!--        <class>study.jpa.jpabook.chap6.manytomany.onetwoway2.Member</class>-->
+<!--        <class>study.jpa.jpabook.chap6.manytomany.onetwoway2.Order</class>-->
+<!--        <class>study.jpa.jpabook.chap7.join.Item</class>-->
+<!--        <class>study.jpa.jpabook.chap7.join.Album</class>-->
+<!--        <class>study.jpa.jpabook.chap7.join.Book</class>-->
+<!--        <class>study.jpa.jpabook.chap7.join.Movie</class>-->
+<!--        <class>study.jpa.jpabook.chap7.composite1.idclass.Parent</class>-->
+<!--        <class>study.jpa.jpabook.chap7.composite1.idclass.ParentId</class>-->
+<!--        <class>study.jpa.jpabook.chap7.composite1.idclass.Child</class>-->
+<!--        <class>study.jpa.jpabook.chap7.composite1.embedded.Parent</class>-->
+<!--        <class>study.jpa.jpabook.chap7.composite2.idclass.Parent</class>-->
+<!--        <class>study.jpa.jpabook.chap7.composite2.idclass.Child</class>-->
+        <class>study.jpa.jpabook.chap7.composite2.onetoone.BoardDetail</class>
+        <class>study.jpa.jpabook.chap7.composite2.onetoone.Board</class>
         <!-- DB 연결 설정 -->
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+<!--            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2://localhost/~/test"/>-->
             <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:testdb"/>
+<!--            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test"/>-->
             <property name="jakarta.persistence.jdbc.user" value="sa"/>
             <property name="jakarta.persistence.jdbc.password" value=""/>
 
