@@ -24,6 +24,14 @@
 <!--        <class>study.jpa.jpabook.chap7.join.Album</class>-->
 <!--        <class>study.jpa.jpabook.chap7.join.Book</class>-->
 <!--        <class>study.jpa.jpabook.chap7.join.Movie</class>-->
+<!--        <class>study.jpa.jpabook.chap7.composite1.idclass.Parent</class>-->
+<!--        <class>study.jpa.jpabook.chap7.composite1.idclass.ParentId</class>-->
+<!--        <class>study.jpa.jpabook.chap7.composite1.idclass.Child</class>-->
+<!--        <class>study.jpa.jpabook.chap7.composite1.embedded.Parent</class>-->
+<!--        <class>study.jpa.jpabook.chap7.composite2.idclass.Parent</class>-->
+<!--        <class>study.jpa.jpabook.chap7.composite2.idclass.Child</class>-->
+        <class>study.jpa.jpabook.chap7.composite2.onetoone.BoardDetail</class>
+        <class>study.jpa.jpabook.chap7.composite2.onetoone.Board</class>
         <!-- DB 연결 설정 -->
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
