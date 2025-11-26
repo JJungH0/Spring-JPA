@@ -1,11 +1,11 @@
-package study.jpa.jpabook.chap7.manytoone276;
+package study.jpa.jpabook.chap7.manytomany;
 
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//@Entity
+@Entity
 public class Parent {
 
     @Id @GeneratedValue
@@ -14,7 +14,9 @@ public class Parent {
 
     private String name;
 
-
-    @OneToMany(mappedBy = "parent")
+    @ManyToMany
+    @JoinTable(name = "PARENT_CHILD",
+            joinColumns = @JoinColumn(name = "PARENT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "CHILD_ID"))
     private List<Child> childList = new ArrayList<>();
 }

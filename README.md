@@ -1,6 +1,9 @@
 # 🌿 Spring JPA
+📘 **정리 노션 링크:**  
+[pure-jap-7 ~ pure-jap-8 JPA 정리](https://bottlenose-balloon-0b4.notion.site/JPA-2025-11-25-275-2b65c23e942f80d49ffee242d4bb23d7?source=copy_link)
 
-## 🧩 1. H2 Database 설치
+
+## 🧩 H2 Database 설치
 - **공식 사이트:** [https://www.h2database.com/](https://www.h2database.com/)
 - 상단 메뉴에서 **Download → All Platforms** 선택
 - **다운로드 후 압축 해제**

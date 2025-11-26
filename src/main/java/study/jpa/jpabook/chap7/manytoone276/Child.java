@@ -2,7 +2,7 @@ package study.jpa.jpabook.chap7.manytoone276;
 
 import jakarta.persistence.*;
 
-@Entity
+//@Entity
 public class Child {
 
     @Id @GeneratedValue
