@@ -1,4 +1,4 @@
-package study.jpa.jpabook.chap8.loading;
+package study.jpa.jpabook.chap8.lazyloading;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -16,6 +16,8 @@ public class Member {
     private String name;
 
     @Setter
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "TEAM_ID", foreignKey = @ForeignKey(name = "FK_MEMBER_TEAM"))
     private Team team;
+
 }

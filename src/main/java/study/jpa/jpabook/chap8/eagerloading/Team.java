@@ -1,4 +1,4 @@
-package study.jpa.jpabook.chap8.loading;
+package study.jpa.jpabook.chap8.eagerloading;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,7 +7,8 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity @Getter
+//@Entity
+@Getter
 public class Team {
 
     @Id @GeneratedValue
