@@ -30,8 +30,12 @@
 <!--        <class>study.jpa.jpabook.chap7.composite1.embedded.Parent</class>-->
 <!--        <class>study.jpa.jpabook.chap7.composite2.idclass.Parent</class>-->
 <!--        <class>study.jpa.jpabook.chap7.composite2.idclass.Child</class>-->
-        <class>study.jpa.jpabook.chap7.composite2.onetoone.BoardDetail</class>
-        <class>study.jpa.jpabook.chap7.composite2.onetoone.Board</class>
+<!--        <class>study.jpa.jpabook.chap7.composite2.onetoone.BoardDetail</class>-->
+<!--        <class>study.jpa.jpabook.chap7.composite2.onetoone.Board</class>-->
+<!--        <class>study.jpa.jpabook.chap8.proxy.Member</class>-->
+<!--        <class>study.jpa.jpabook.chap8.proxy.Team</class>-->
+        <class>study.jpa.jpabook.chap8.loading.Member</class>
+        <class>study.jpa.jpabook.chap8.loading.Team</class>
         <!-- DB 연결 설정 -->
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
