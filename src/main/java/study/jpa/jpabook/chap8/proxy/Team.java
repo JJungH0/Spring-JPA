@@ -1,17 +1,18 @@
-package study.jpa.jpabook.chap7.manytomany;
+package study.jpa.jpabook.chap8.proxy;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import lombok.Data;
 
 //@Entity
-public class Child {
-
+@Data
+public class Team {
     @Id @GeneratedValue
-    @Column(name = "CHILD_ID")
+    @Column(name = "TEAM_ID")
     private Long id;
 
-    private String name;
-
+    @Column(name = "TEAM_NAME")
+    private String teamName;
 }
