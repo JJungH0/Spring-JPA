@@ -34,8 +34,10 @@
 <!--        <class>study.jpa.jpabook.chap7.composite2.onetoone.Board</class>-->
 <!--        <class>study.jpa.jpabook.chap8.proxy.Member</class>-->
 <!--        <class>study.jpa.jpabook.chap8.proxy.Team</class>-->
-        <class>study.jpa.jpabook.chap8.loading.Member</class>
-        <class>study.jpa.jpabook.chap8.loading.Team</class>
+<!--        <class>study.jpa.jpabook.chap8.eagerloading.Member</class>-->
+<!--        <class>study.jpa.jpabook.chap8.eagerloading.Team</class>-->
+        <class>study.jpa.jpabook.chap8.lazyloading.Team</class>
+        <class>study.jpa.jpabook.chap8.lazyloading.Member</class>
         <!-- DB 연결 설정 -->
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
