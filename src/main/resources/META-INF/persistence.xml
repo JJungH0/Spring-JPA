@@ -38,16 +38,21 @@
 <!--        <class>study.jpa.jpabook.chap8.eagerloading.Team</class>-->
 <!--        <class>study.jpa.jpabook.chap8.lazyloading.Team</class>-->
 <!--        <class>study.jpa.jpabook.chap8.lazyloading.Member</class>-->
-        <class>study.jpa.jpabook.chap8.lazyloading2.Member</class>
-        <class>study.jpa.jpabook.chap8.lazyloading2.Team</class>
-        <class>study.jpa.jpabook.chap8.lazyloading2.Order</class>
-        <class>study.jpa.jpabook.chap8.lazyloading2.Product</class>
+<!--        <class>study.jpa.jpabook.chap8.lazyloading2.Member</class>-->
+<!--        <class>study.jpa.jpabook.chap8.lazyloading2.Team</class>-->
+<!--        <class>study.jpa.jpabook.chap8.lazyloading2.Order</class>-->
+<!--        <class>study.jpa.jpabook.chap8.lazyloading2.Product</class>-->
+        <class>study.jpa.jpabook.chap8.cascade.chap1.Parent</class>
+        <class>study.jpa.jpabook.chap8.cascade.chap1.Child</class>
         <!-- DB 연결 설정 -->
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
 <!--            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2://localhost/~/test"/>-->
+<!--            인메모리 DB-->
             <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:testdb"/>
-<!--            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test"/>-->
+<!--            파일 DB-->
+<!--            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:~/testdb"/>-->
+            <!--            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test"/>-->
             <property name="jakarta.persistence.jdbc.user" value="sa"/>
             <property name="jakarta.persistence.jdbc.password" value=""/>
 
