@@ -36,8 +36,12 @@
 <!--        <class>study.jpa.jpabook.chap8.proxy.Team</class>-->
 <!--        <class>study.jpa.jpabook.chap8.eagerloading.Member</class>-->
 <!--        <class>study.jpa.jpabook.chap8.eagerloading.Team</class>-->
-        <class>study.jpa.jpabook.chap8.lazyloading.Team</class>
-        <class>study.jpa.jpabook.chap8.lazyloading.Member</class>
+<!--        <class>study.jpa.jpabook.chap8.lazyloading.Team</class>-->
+<!--        <class>study.jpa.jpabook.chap8.lazyloading.Member</class>-->
+        <class>study.jpa.jpabook.chap8.lazyloading2.Member</class>
+        <class>study.jpa.jpabook.chap8.lazyloading2.Team</class>
+        <class>study.jpa.jpabook.chap8.lazyloading2.Order</class>
+        <class>study.jpa.jpabook.chap8.lazyloading2.Product</class>
         <!-- DB 연결 설정 -->
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
