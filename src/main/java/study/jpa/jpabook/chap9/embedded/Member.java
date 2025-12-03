@@ -2,7 +2,7 @@ package study.jpa.jpabook.chap9.embedded;
 
 import jakarta.persistence.*;
 
-@Entity
+//@Entity
 public class Member {
 
     @Id @GeneratedValue
