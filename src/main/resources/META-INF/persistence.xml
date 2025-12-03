@@ -42,8 +42,10 @@
 <!--        <class>study.jpa.jpabook.chap8.lazyloading2.Team</class>-->
 <!--        <class>study.jpa.jpabook.chap8.lazyloading2.Order</class>-->
 <!--        <class>study.jpa.jpabook.chap8.lazyloading2.Product</class>-->
-        <class>study.jpa.jpabook.chap8.cascade.chap1.Parent</class>
-        <class>study.jpa.jpabook.chap8.cascade.chap1.Child</class>
+<!--        <class>study.jpa.jpabook.chap8.cascade.chap1.Parent</class>-->
+<!--        <class>study.jpa.jpabook.chap8.cascade.chap1.Child</class>-->
+        <class>study.jpa.jpabook.chap9.valuetpyecolletion.Member</class>
+
         <!-- DB 연결 설정 -->
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
