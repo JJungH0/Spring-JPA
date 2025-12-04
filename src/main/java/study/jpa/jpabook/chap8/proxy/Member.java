@@ -5,6 +5,7 @@ import lombok.Data;
 
 //@Entity
 @Data
+
 public class Member {
     @Id @GeneratedValue
     @Column(name = "MEMBER_ID")
@@ -13,7 +14,7 @@ public class Member {
     @Column(name = "USER_NAME")
     private String userName;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Team team;
 
 }

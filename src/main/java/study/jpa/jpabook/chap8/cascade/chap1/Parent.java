@@ -9,7 +9,7 @@ import java.util.List;
 
 //@Entity
 @Getter @Setter
-public class Parent {
+public class Parent{
 
     @Id @GeneratedValue
     private Long id;
