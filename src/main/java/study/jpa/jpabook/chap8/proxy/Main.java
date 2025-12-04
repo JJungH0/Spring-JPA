@@ -11,8 +11,8 @@ public class Main {
     public static void main(String[] args) {
 
         save(emf.createEntityManager());
-        printUser(emf.createEntityManager());
-//        printUserAndTeam(emf.createEntityManager());
+//        printUser(emf.createEntityManager());
+        printUserAndTeam(emf.createEntityManager());
 
 
     }
@@ -31,10 +31,15 @@ public class Main {
         tr.commit();
     }
     static void printUserAndTeam(EntityManager em) {
+
         Member member = em.find(Member.class, 1L);
+
         Team team = member.getTeam();
-        log.info("member = {}", member);
-        log.info("team = {}", team);
+
+
+        System.out.println(team);
+//        log.info("team = {}", team);
+//        log.info("team2 = {}",team.getClass().getName());
     }
 
     static void printUser(EntityManager em) {
