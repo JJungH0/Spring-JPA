@@ -27,7 +27,8 @@ public class Main {
         save(emf.createEntityManager());
 //        paramBinding(emf.createEntityManager());
 //        locationBinding(emf.createEntityManager());
-        test(emf.createEntityManager());
+//        test(emf.createEntityManager());
+        pagination(emf.createEntityManager());
 
     }
 
@@ -171,5 +172,15 @@ public class Main {
             log.info("result[0] = {} result[0].getClass = {}", result[0], result[0].getClass().getName());
             log.info("result[1] = {} result[1].getClass = {}", result[1], result[1].getClass().getName());
         }
+    }
+
+    static void pagination(EntityManager em) {
+        TypedQuery<Member> query = em.createQuery("select m from Member m order by m.age desc"
+                , Member.class);
+
+        query.setFirstResult(10); // 0부터 시작이니 10 -> 11번째 부터 시작
+        query.setMaxResults(20); // 11번 포함 해서 20개를 출력 -> 30번째 데이터 조회
+        query.getResultList();
+
     }
 }
