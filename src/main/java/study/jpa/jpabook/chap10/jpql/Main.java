@@ -8,7 +8,10 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
+import study.jpa.jpabook.chap10.jpql.dto.UserDTO;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Slf4j
@@ -23,10 +26,65 @@ public class Main {
 //        query(emf.createEntityManager());
         save(emf.createEntityManager());
 //        paramBinding(emf.createEntityManager());
-        locationBinding(emf.createEntityManager());
+//        locationBinding(emf.createEntityManager());
+        test(emf.createEntityManager());
 
     }
 
+    static void  test(EntityManager em) {
+        TypedQuery<UserDTO> query = em.createQuery("select new study.jpa.jpabook.chap10.jpql.dto.UserDTO(m.name, m.age) from Member m"
+                , UserDTO.class);
+        List<UserDTO> resultList = query.getResultList();
+//        List<UserDTO> resultList = em.createQuery("select m.name, m.age from Member m",
+//                UserDTO.class).getResultList();
+
+        for (UserDTO userDTO : resultList) {
+            log.info("userDTO = {}", userDTO);
+        }
+//        ArrayList<UserDTO> userDTOS = new ArrayList<>();
+//
+//        List<Object[]> resultList = em.createQuery("select m.name, m.age from Member m")
+//                .getResultList();
+//
+//        for (Object[] objects : resultList) {
+//            UserDTO userDTO = new UserDTO((String) objects[0], (Integer) objects[1]);
+//            userDTOS.add(userDTO);
+//        }
+//
+//        for (UserDTO userDTO : userDTOS) {
+//            log.info("userDTO = {}", userDTO);
+//        }
+//        String sql = "SELECT o.address FROM Order o";
+//        List<Address> resultList = em.createQuery(sql, Address.class).getResultList();
+//        List<String> resultList = em.createQuery("SELECT DISTINCT m.name FROM Member m", String.class).getResultList();
+//        for (String s : resultList) {
+//            log.info("s = {}",s);
+//        }
+//        em.createQuery("select avg (o.orderAmount) from Order o", Double.class)
+//                .getSingleResult();
+
+//        List<Object[]> resultList = em.createQuery("select m.name, m.age from Member m")
+//                .getResultList();
+//        for (Object[] objects : resultList) {
+//            log.info("{}",(String)objects[0]);
+//            log.info("{}",(Integer)objects[1]);
+//        }
+
+//        List<Object[]> resultList = em.createQuery("select o.member, o.product, o.orderAmount from Order o")
+//                .getResultList();
+
+//        for (Object[] objects : resultList) {
+//            Member member = (Member) objects[0];
+//            Product product = (Product) objects[1];
+//            Integer orderAmount = (Integer) objects[2];
+//        }
+//        Iterator iterator = resultList.iterator();
+//        while (iterator.hasNext()) {
+//            Object[] next = (Object[]) iterator.next();
+//            log.info("next[0] = {}", next[0]);
+//            log.info("next[1] = {}", next[1]);
+//        }
+    }
     static void locationBinding(EntityManager em) {
         Member result = em.createQuery("select m from Member m where m.name = ?1"
                         , Member.class)
