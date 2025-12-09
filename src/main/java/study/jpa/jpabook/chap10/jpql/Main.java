@@ -28,10 +28,88 @@ public class Main {
 //        paramBinding(emf.createEntityManager());
 //        locationBinding(emf.createEntityManager());
 //        test(emf.createEntityManager());
-        pagination(emf.createEntityManager());
-
+//        pagination(emf.createEntityManager());
+//        jpqlJoin(emf.createEntityManager());
+//        jpqlJoin2(emf.createEntityManager());
+//        jpqlJoin3(emf.createEntityManager());
+//        fetchJoin(emf.createEntityManager());
+//        fetchJoin2(emf.createEntityManager());
+//        collectionFetchJoin(emf.createEntityManager());
+        innerJoin(emf.createEntityManager());
     }
 
+    static void innerJoin(EntityManager em) {
+        List<Team> resultList = em.createQuery("SELECT t FROM Team t JOIN t.members WHERE t.name = '팀A'"
+                        , Team.class)
+                .getResultList();
+    }
+
+    static void collectionFetchJoin(EntityManager em) {
+        List<Team> resultList = em.createQuery("SELECT DISTINCT t FROM Team t JOIN FETCH t.members WHERE t.name = :teamName", Team.class)
+                .setParameter("teamName", "팀A")
+                .getResultList();
+
+        log.info("resultList.size() = {}",resultList.size());
+
+        for (Team team : resultList) {
+            log.info("team.getName() = {}, team = {}", team.getName(), team);
+            for (Member member : team.getMembers()) {
+                log.info("member.getName() = {}, member = {}",member.getName(), member);
+            }
+        }
+    }
+
+    static void fetchJoin2(EntityManager em) {
+        List<Team> resultList = em.createQuery("SELECT t FROM Team t JOIN FETCH t.members WHERE t.name = '팀A'", Team.class)
+                .getResultList();
+        log.info("resultList.getClass() = {}",resultList.getClass().getName());
+    }
+    static void fetchJoin(EntityManager em) {
+        List<Member> resultList = em.createQuery("SELECT m FROM Member m JOIN FETCH m.team", Member.class)
+                .getResultList();
+        log.info("resultList.getClass() = {}", resultList.getClass().getName());
+        for (Member member : resultList) {
+            // 패치 조인으로 회원과 팀을 함께 조회해서 지연 로딩 발생 안함
+            log.info("member.getClass() = {}", member.getClass().getName());
+            log.info("userName = {}, teamName = {}",member.getName(),member.getTeam().getName());
+        }
+//        Member member = em.find(Member.class, 1L);
+//        log.info("member = {}",member);
+    }
+    static void jpqlJoin(EntityManager em) {
+
+        String query = "SELECT m FROM Member m INNER JOIN m.team t WHERE t.name = :teamName";
+
+        List<Member> resultList = em.createQuery(query, Member.class)
+                .setParameter("teamName", "팀A")
+                .getResultList();
+
+        log.info("resultList = {}",resultList);
+    }
+
+    static void jpqlJoin2(EntityManager em) {
+        String query = "SELECT m, t FROM Member m JOIN m.team t WHERE t.name = :teamName ORDER BY m.age";
+
+        List<Object[]> resultList = em.createQuery(query)
+                .setParameter("teamName","팀A")
+                .getResultList();
+
+        for (Object[] objects : resultList) {
+            Member member = (Member) objects[0];
+            Team team = (Team) objects[1];
+            log.info("member = {}", member);
+            log.info("team = {}", team);
+        }
+    }
+
+    static void jpqlJoin3(EntityManager em) {
+        String query = "SELECT m, t FROM Member m LEFT JOIN m.team t";
+        List resultList = em.createQuery(query)
+                .getResultList();
+//        List<Member> resultList = em.createQuery(query, Member.class)
+//                .getResultList();
+
+    }
     static void  test(EntityManager em) {
         TypedQuery<UserDTO> query = em.createQuery("select new study.jpa.jpabook.chap10.jpql.dto.UserDTO(m.name, m.age) from Member m"
                 , UserDTO.class);
@@ -148,13 +226,18 @@ public class Main {
     static void save(EntityManager em) {
         EntityTransaction tr = em.getTransaction();
         tr.begin();
+        Team team = new Team();
+        team.setName("팀A");
         Member member1 = new Member();
         member1.setAge(27);
         member1.setName("junghwan");
+        member1.setTeam(team);
 
         Member member2 = new Member();
         member2.setAge(28);
         member2.setName("ABC");
+        member2.setTeam(team);
+        em.persist(team);
         em.persist(member1);
         em.persist(member2);
         tr.commit();
@@ -181,6 +264,5 @@ public class Main {
         query.setFirstResult(10); // 0부터 시작이니 10 -> 11번째 부터 시작
         query.setMaxResults(20); // 11번 포함 해서 20개를 출력 -> 30번째 데이터 조회
         query.getResultList();
-
     }
 }
