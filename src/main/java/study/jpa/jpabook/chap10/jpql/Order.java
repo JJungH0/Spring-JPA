@@ -1,9 +1,17 @@
 package study.jpa.jpabook.chap10.jpql;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "ORDERS")
+@NoArgsConstructor
+@Builder
+@AllArgsConstructor
+@ToString
 public class Order {
     @Id
     @GeneratedValue
