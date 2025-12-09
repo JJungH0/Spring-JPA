@@ -24,7 +24,7 @@ public class Member {
     @Column(name = "AGE")
     private int age;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID", foreignKey = @ForeignKey(name = "MEMBER_TEAM"))
     private Team team;
 
