@@ -42,6 +42,9 @@ public class Main {
         List<Team> resultList = em.createQuery("SELECT t FROM Team t JOIN t.members WHERE t.name = '팀A'"
                         , Team.class)
                 .getResultList();
+
+        em.createQuery("SELECT SIZE(t.members) FROM Team t")
+                .getSingleResult();
     }
 
     static void collectionFetchJoin(EntityManager em) {
@@ -151,7 +154,6 @@ public class Main {
 
 //        List<Object[]> resultList = em.createQuery("select o.member, o.product, o.orderAmount from Order o")
 //                .getResultList();
-
 //        for (Object[] objects : resultList) {
 //            Member member = (Member) objects[0];
 //            Product product = (Product) objects[1];
