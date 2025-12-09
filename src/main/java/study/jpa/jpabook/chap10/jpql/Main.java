@@ -35,16 +35,52 @@ public class Main {
 //        fetchJoin(emf.createEntityManager());
 //        fetchJoin2(emf.createEntityManager());
 //        collectionFetchJoin(emf.createEntityManager());
-        innerJoin(emf.createEntityManager());
+//        innerJoin(emf.createEntityManager());
+//        subQuery(emf.createEntityManager());
+//        subQuery2(emf.createEntityManager());
+//        subQuery3(emf.createEntityManager());
+        subQuery4(emf.createEntityManager());
     }
 
+    static void subQuery4(EntityManager em) {
+        List<Member> resultList = em.createQuery("SELECT m FROM Member m WHERE m.team = ANY (SELECT t FROM Team t)", Member.class)
+                .getResultList();
+        for (Member member : resultList) {
+            log.info("member = {}",member);
+        }
+    }
+    static void subQuery3(EntityManager em) {
+        List<Order> resultList = em.createQuery("SELECT o FROM Order o WHERE o.orderAmount > ALL (SELECT p.stockAmount FROM Product p)", Order.class).getResultList();
+        log.info("resultList.size = {}",resultList.size());
+        for (Order order : resultList) {
+            log.info("order = {}", order);
+        }
+    }
+    static void subQuery2(EntityManager em) {
+        List<Member> resultList = em.createQuery("SELECT m FROM Member m WHERE NOT EXISTS (SELECT t FROM m.team t WHERE t.name = '팀B')", Member.class)
+                .getResultList();
+        for (Member member : resultList) {
+            log.info("member = {}",member);
+        }
+    }
+    static void subQuery(EntityManager em) {
+        List<Member> result1 = em.createQuery("SELECT m FROM Member m WHERE m.age > (SELECT AVG (m2.age) FROM Member m2)", Member.class)
+                .getResultList();
+        log.info("result1.size() = {}",result1.size());
+
+        List<Member> result2 = em.createQuery("SELECT m FROM Member m WHERE (SELECT COUNT(o) FROM Order o WHERE m = o.member) > 0", Member.class).getResultList();
+        List<Member> result3 = em.createQuery("SELECT m FROM Member m WHERE SIZE(m.orders) > 0 ", Member.class).getResultList();
+        System.out.println(result2.getFirst().getName());
+        log.info("result2.size() = {}", result2.size());
+        System.out.println(result3.getFirst().getName());
+        log.info("result3.size() = {}", result2.size());
+    }
     static void innerJoin(EntityManager em) {
         List<Team> resultList = em.createQuery("SELECT t FROM Team t JOIN t.members WHERE t.name = '팀A'"
                         , Team.class)
                 .getResultList();
 
-        em.createQuery("SELECT SIZE(t.members) FROM Team t")
-                .getSingleResult();
+        List<Integer> resultList1 = em.createQuery("SELECT SIZE(t.members) FROM Team t", Integer.class).getResultList();
     }
 
     static void collectionFetchJoin(EntityManager em) {
@@ -228,20 +264,35 @@ public class Main {
     static void save(EntityManager em) {
         EntityTransaction tr = em.getTransaction();
         tr.begin();
-        Team team = new Team();
-        team.setName("팀A");
+        Team teamA = new Team();
+        teamA.setName("팀A");
+        Team teamB = new Team();
+        teamB.setName("팀B");
         Member member1 = new Member();
         member1.setAge(27);
         member1.setName("junghwan");
-        member1.setTeam(team);
+        member1.setTeam(teamA);
 
         Member member2 = new Member();
         member2.setAge(28);
         member2.setName("ABC");
-        member2.setTeam(team);
-        em.persist(team);
+        member2.setTeam(teamA);
+
+        Member member3 = new Member();
+        member3.setAge(29);
+        member3.setName("홍길동");
+        member3.setTeam(teamB);
+
+        Order order = Order.builder()
+                .member(member3)
+                .build();
+
+        em.persist(teamA);
+        em.persist(teamB);
         em.persist(member1);
         em.persist(member2);
+        em.persist(member3);
+        em.persist(order);
         tr.commit();
     }
 
