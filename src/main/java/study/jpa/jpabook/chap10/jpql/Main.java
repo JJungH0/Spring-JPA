@@ -10,6 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import study.jpa.jpabook.chap10.jpql.dto.UserDTO;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -39,7 +42,40 @@ public class Main {
 //        subQuery(emf.createEntityManager());
 //        subQuery2(emf.createEntityManager());
 //        subQuery3(emf.createEntityManager());
-        subQuery4(emf.createEntityManager());
+//        subQuery4(emf.createEntityManager());
+//        collectionFetchJoin(emf.createEntityManager());
+//        collectionCompare(emf.createEntityManager());
+//        collectionMemberCompare(emf.createEntityManager());
+        test2(emf.createEntityManager());
+    }
+    static void test2(EntityManager em) {
+        List<Object[]> resultList = em.createQuery("SELECT CURRENT_DATE, CURRENT_TIME, CURRENT_TIMESTAMP FROM Team", Object[].class)
+                .getResultList();
+
+        for (Object[] objects : resultList) {
+            Date date = (Date) objects[0];
+            Time time = (Time) objects[1];
+            Timestamp timestamp = (Timestamp) objects[2];
+            log.info("DATE = {}, TIME = {}, TIMESTAMP = {}", date,time,timestamp);
+        }
+
+    }
+
+    static void collectionMemberCompare(EntityManager em) {
+        Member member = em.find(Member.class, 1L);
+
+        Team resultList = em.createQuery("SELECT t FROM Team t WHERE :memberParam MEMBER of t.members", Team.class)
+                .setParameter("memberParam", member)
+                .getSingleResult();
+        log.info("resultList = {}", resultList);
+    }
+    static void collectionCompare(EntityManager em) {
+        List<Member> resultList = em.createQuery("SELECT m FROM Member m WHERE m.orders IS NOT EMPTY"
+                        , Member.class)
+                .getResultList();
+        for (Member member : resultList) {
+            log.info("member = {}", member);
+        }
     }
 
     static void subQuery4(EntityManager em) {
