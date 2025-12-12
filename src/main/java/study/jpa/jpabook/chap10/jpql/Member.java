@@ -10,11 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @ToString(exclude = "orders")
+@NamedQueries({
+        @NamedQuery(name = "Member.findByName",
+        query = "SELECT m FROM Member m WHERE m.name = :paramName"),
+        @NamedQuery(name = "Member.count",
+        query = "SELECT COUNT(m) FROM Member m")
+})
 public class Member {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "MEMBER_ID")
     private Long id;
 
