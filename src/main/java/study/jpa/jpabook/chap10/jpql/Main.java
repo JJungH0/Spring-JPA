@@ -46,7 +46,32 @@ public class Main {
 //        caseQuery1(emf.createEntityManager());
 //        caseQuery2(emf.createEntityManager());
 //        test3(emf.createEntityManager());
-        test4(emf.createEntityManager());
+//        test4(emf.createEntityManager());
+//        test5(emf.createEntityManager());
+//        test6(emf.createEntityManager());
+        test7(emf.createEntityManager());
+    }
+
+    static void test7(EntityManager em) {
+        Team team = em.find(Team.class, 1L);
+        em.createQuery("SELECT m FROM Member m WHERE m.team = :team", Member.class)
+                .setParameter("team",team)
+                .getResultList();
+
+        em.createQuery("SELECT m FROM Member m WHERE m.team.id = :teamId", Member.class)
+                .setParameter("teamId", team.getId())
+                .getResultList();
+    }
+    static void test6(EntityManager em) {
+        Member member = em.find(Member.class, 1L);
+
+        em.createQuery("SELECT m FROM Member m WHERE m = :member")
+                .setParameter("member", member)
+                .getResultList();
+    }
+    static void test5(EntityManager em) {
+        em.createQuery("SELECT COUNT(m.id) FROM Member m").getResultList();
+        em.createQuery("SELECT COUNT(m) FROM Member m").getResultList();
     }
 
     static void test4(EntityManager em) {
