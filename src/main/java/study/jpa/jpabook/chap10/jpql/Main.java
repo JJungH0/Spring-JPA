@@ -1,20 +1,16 @@
 package study.jpa.jpabook.chap10.jpql;
 
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Session;
 import study.jpa.jpabook.chap10.jpql.dto.UserDTO;
 
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Slf4j
@@ -46,7 +42,45 @@ public class Main {
 //        collectionFetchJoin(emf.createEntityManager());
 //        collectionCompare(emf.createEntityManager());
 //        collectionMemberCompare(emf.createEntityManager());
-        test2(emf.createEntityManager());
+//        test2(emf.createEntityManager());
+//        caseQuery1(emf.createEntityManager());
+//        caseQuery2(emf.createEntityManager());
+//        test3(emf.createEntityManager());
+        test4(emf.createEntityManager());
+    }
+
+    static void test4(EntityManager em) {
+        List<String> resultList = em.createQuery("SELECT NULLIF(m.name, 'junghwan')FROM Member m", String.class).getResultList();
+        for (String s : resultList) {
+            log.info("s = {}",s);
+        }
+    }
+    static void test3(EntityManager em) {
+        List<String> resultList = em.createQuery("SELECT COALESCE(m.name, '이름 없는 회원')FROM Member m", String.class).getResultList();
+        for (String s : resultList) {
+            log.info("s = {}", s);
+        }
+    }
+
+    static void caseQuery2(EntityManager em) {
+        List<String> resultList = em.createQuery(
+                "SELECT " +
+                        "CASE t.name " +
+                        "WHEN '팀A' THEN '인센티브110%' " +
+                        "WHEN '팀B' THEN '인센티브120%' " +
+                        "ELSE '인센티브105%' END FROM Team t", String.class)
+                .getResultList();
+
+        for (String s : resultList) {
+            log.info("s = {}",s);
+        }
+    }
+    static void caseQuery1(EntityManager em) {
+        List<String> resultList = em.createQuery("SELECT CASE WHEN m.age <= 10 THEN '학생요금' WHEN m.age >= 60 THEN '경로요금' ELSE '일반요금' END FROM Member m", String.class)
+                .getResultList();
+        for (String re : resultList) {
+            log.info("re = {}", re);
+        }
     }
     static void test2(EntityManager em) {
         List<Object[]> resultList = em.createQuery("SELECT CURRENT_DATE, CURRENT_TIME, CURRENT_TIMESTAMP FROM Team", Object[].class)
