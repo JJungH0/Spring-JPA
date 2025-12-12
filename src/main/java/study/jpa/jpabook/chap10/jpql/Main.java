@@ -49,9 +49,20 @@ public class Main {
 //        test4(emf.createEntityManager());
 //        test5(emf.createEntityManager());
 //        test6(emf.createEntityManager());
-        test7(emf.createEntityManager());
+//        test7(emf.createEntityManager());
+        namedQuery(emf.createEntityManager());
+
     }
 
+    static void namedQuery(EntityManager em) {
+        Member member = em.createNamedQuery("Member.findByName", Member.class)
+                .setParameter("paramName", "junghwan")
+                .getSingleResult();
+
+        Long singleResult = em.createNamedQuery("Member.count", Long.class).getSingleResult();
+        log.info("result = {}",singleResult);
+        log.info("member = {}",member);
+    }
     static void test7(EntityManager em) {
         Team team = em.find(Team.class, 1L);
         em.createQuery("SELECT m FROM Member m WHERE m.team = :team", Member.class)
