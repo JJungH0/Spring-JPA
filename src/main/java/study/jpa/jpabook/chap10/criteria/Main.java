@@ -26,7 +26,8 @@ public class Main {
 //        dtoFind(emf.createEntityManager());
 //        groupByFind(emf.createEntityManager());
 //        havingFind(emf.createEntityManager());
-        joinFind(emf.createEntityManager());
+//        joinFind(emf.createEntityManager());
+        subQuery(emf.createEntityManager());
     }
 
     static void save(EntityManager em) {
@@ -201,5 +202,26 @@ public class Main {
                 .where(cb.equal(t.get("name"), "팀A"));
 //        cq.multiselect(m);
         em.createQuery(cq).getResultList();
+    }
+
+    static void subQuery(EntityManager em) {
+        /**
+         * JPQL :
+         * SELECT m
+         * FROM Member m
+         * WHERE m.age >= (SELECT AVG(m2.age) FROM Member m2)
+         */
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Member> mainQuery = cb.createQuery(Member.class);
+
+        Subquery<Double> subquery = mainQuery.subquery(Double.class);
+        Root<Member> m2 = subquery.from(Member.class);
+        subquery.select(cb.avg(m2.get("age")));
+
+        Root<Member> m = mainQuery.from(Member.class);
+        mainQuery.select(m)
+                .where(cb.ge(m.get("age"), subquery));
+
+        List<Member> resultList = em.createQuery(mainQuery).getResultList();
     }
 }
