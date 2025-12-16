@@ -1,16 +1,14 @@
 package study.jpa.jpabook.chap10.jpql;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Table(name = "ORDERS")
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
+@Getter
 @ToString
 public class Order {
     @Id
