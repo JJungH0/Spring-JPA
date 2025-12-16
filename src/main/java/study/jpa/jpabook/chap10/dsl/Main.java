@@ -8,8 +8,8 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.query.criteria.JpaSubQuery;
 import study.jpa.jpabook.chap10.jpql.*;
-import study.jpa.jpabook.chap10.ployjpql.QItem;
 
 import java.util.List;
 
@@ -24,7 +24,32 @@ public class Main {
 //        pageable(emf.createEntityManager());
 //        groupDsl(emf.createEntityManager());
 //        join1(emf.createEntityManager());
-        setterJoin(emf.createEntityManager());
+//        setterJoin(emf.createEntityManager());
+//        subQuery(emf.createEntityManager());
+        subQuery2(emf.createEntityManager());
+    }
+
+    static void subQuery(EntityManager em) {
+        JPAQueryFactory query = new JPAQueryFactory(em);
+        QProduct product = QProduct.product;
+        QProduct productSub = new QProduct("productSub");
+
+        query.selectFrom(product)
+                .where(product.price.eq(
+                        query.select(productSub.price.max()).from(productSub)
+                ))
+                .fetchOne();
+    }
+
+    static void subQuery2(EntityManager em) {
+        JPAQueryFactory query = new JPAQueryFactory(em);
+        QProduct product = QProduct.product;
+        QProduct subProduct = new QProduct("subProduct");
+
+        query.selectFrom(product)
+                .where(product.in(query.selectFrom(subProduct)
+                                .where(product.name.eq(subProduct.name))))
+                .fetch();
     }
 
     static void setterJoin(EntityManager em) {

@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
+//@Entity
 @DiscriminatorValue("B")
 @ToString
 @Getter @Setter
