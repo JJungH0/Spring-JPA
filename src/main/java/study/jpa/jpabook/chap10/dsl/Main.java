@@ -1,5 +1,6 @@
 package study.jpa.jpabook.chap10.dsl;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryModifiers;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
@@ -13,6 +14,7 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.query.criteria.JpaSubQuery;
+import org.springframework.util.StringUtils;
 import study.jpa.jpabook.chap10.jpql.*;
 
 import java.util.List;
@@ -35,13 +37,34 @@ public class Main {
 //        projectionQuery2(emf.createEntityManager());
 //        beanQuery(emf.createEntityManager());
 //        filedQuery();
-        constructorQuery();
-        batchQuery(emf.createEntityManager());
-        constructorQuery();
-        batchQuery2(emf.createEntityManager());
+//        constructorQuery();
+//        batchQuery(emf.createEntityManager());
+//        constructorQuery();
+//        batchQuery2(emf.createEntityManager());
+
+        dynamicQuery();
         constructorQuery();
     }
 
+    static void dynamicQuery() {
+        SearchParam param = new SearchParam();
+        param.setName("백엔드 개발취준");
+        param.setPrice(2000000);
+
+        QProduct product = QProduct.product;
+
+        BooleanBuilder builder = new BooleanBuilder();
+        if (StringUtils.hasText(param.getName())) {
+            builder.and(product.name.contains(param.getName()));
+        }
+        if (param.getPrice() != 0) {
+            builder.and(product.price.gt(param.getPrice()));
+        }
+
+        query.selectFrom(product)
+                .where(builder)
+                .fetch();
+    }
     static void batchQuery2(EntityManager em) {
         QProduct product = QProduct.product;
         JPADeleteClause jpaDeleteClause = new JPADeleteClause(em, product);
