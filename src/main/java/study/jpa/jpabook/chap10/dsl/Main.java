@@ -3,8 +3,10 @@ package study.jpa.jpabook.chap10.dsl;
 import com.querydsl.core.QueryModifiers;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.impl.JPADeleteClause;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.querydsl.jpa.impl.JPAUpdateClause;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -34,8 +36,34 @@ public class Main {
 //        beanQuery(emf.createEntityManager());
 //        filedQuery();
         constructorQuery();
+        batchQuery(emf.createEntityManager());
+        constructorQuery();
+        batchQuery2(emf.createEntityManager());
+        constructorQuery();
     }
 
+    static void batchQuery2(EntityManager em) {
+        QProduct product = QProduct.product;
+        JPADeleteClause jpaDeleteClause = new JPADeleteClause(em, product);
+
+        EntityTransaction tr = em.getTransaction();
+        tr.begin();
+        jpaDeleteClause.where(product.name.eq("수정된 사과박스"))
+                .execute();
+        tr.commit();
+    }
+    static void batchQuery(EntityManager em) {
+        QProduct product = QProduct.product;
+        JPAUpdateClause jpaUpdateClause = new JPAUpdateClause(em, product);
+
+        EntityTransaction tr = em.getTransaction();
+        tr.begin();
+        jpaUpdateClause.where(product.name.eq("사과박스"))
+                .set(product.name, "수정된 사과박스")
+                .execute();
+        em.clear();
+        tr.commit();
+    }
     static void beanQuery(EntityManager em) {
         JPAQueryFactory query = new JPAQueryFactory(em);
         QProduct product = QProduct.product;
