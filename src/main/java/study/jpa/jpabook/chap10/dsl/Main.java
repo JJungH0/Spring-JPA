@@ -1,6 +1,8 @@
 package study.jpa.jpabook.chap10.dsl;
 
 import com.querydsl.core.QueryModifiers;
+import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
@@ -16,7 +18,7 @@ import java.util.List;
 @Slf4j
 public class Main {
     static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");
-
+    static final JPAQueryFactory query = new JPAQueryFactory(emf.createEntityManager());
     public static void main(String[] args) {
         save(emf.createEntityManager());
 //        queryDsl(emf.createEntityManager());
@@ -26,9 +28,86 @@ public class Main {
 //        join1(emf.createEntityManager());
 //        setterJoin(emf.createEntityManager());
 //        subQuery(emf.createEntityManager());
-        subQuery2(emf.createEntityManager());
+//        subQuery2(emf.createEntityManager());
+//        projectionQuery(emf.createEntityManager());
+//        projectionQuery2(emf.createEntityManager());
+//        beanQuery(emf.createEntityManager());
+//        filedQuery();
+        constructorQuery();
     }
 
+    static void beanQuery(EntityManager em) {
+        JPAQueryFactory query = new JPAQueryFactory(em);
+        QProduct product = QProduct.product;
+
+        List<ProductDTO> fetch = query.select(Projections.bean(
+                        ProductDTO.class,
+                        product.name.as("username"),
+                        product.price))
+                .from(product)
+                .fetch();
+
+        for (ProductDTO productDTO : fetch) {
+            log.info("productDTO = {}",productDTO);
+        }
+    }
+
+    static void constructorQuery() {
+        QProduct product = QProduct.product;
+        List<ProductDTO> result = query.select(Projections.constructor(
+                ProductDTO.class,
+                product.name,
+                product.price
+        )).from(product).fetch();
+
+        for (ProductDTO productDTO : result) {
+            log.info("productDTO = {}",productDTO);
+        }
+
+    }
+
+    static void filedQuery() {
+        QProduct product = QProduct.product;
+
+        List<ProductDTO> result = query.select(
+                        Projections.fields(
+                                ProductDTO.class,
+                                product.name.as("username"),
+                                product.price))
+                .from(product)
+                .fetch();
+
+        for (ProductDTO productDTO : result) {
+            log.info("productDTO = {}",productDTO);
+        }
+
+
+    }
+    static void projectionQuery2(EntityManager em) {
+        JPAQueryFactory query = new JPAQueryFactory(em);
+        QMember member = QMember.member;
+
+        List<Tuple> result = query.select(member.name, member.age)
+                .from(member)
+                .fetch();
+
+        for (Tuple tuple : result) {
+            log.info("name = {}",tuple.get(member.name));
+            log.info("age = {}",tuple.get(member.age));
+        }
+    }
+
+    static void projectionQuery(EntityManager em) {
+        JPAQueryFactory query = new JPAQueryFactory(em);
+        QMember member = QMember.member;
+        List<String> result = query.select(member.name)
+                .from(member)
+                .fetch();
+
+        for (String s : result) {
+            log.info("s = {}",s);
+        }
+    }
     static void subQuery(EntityManager em) {
         JPAQueryFactory query = new JPAQueryFactory(em);
         QProduct product = QProduct.product;
@@ -174,7 +253,7 @@ public class Main {
         member1.setName("회원1");
 
         Member member2 = new Member();
-        member2.setName("회원1");
+        member2.setName("회원2");
         member2.setAge(28);
 
         Product product1 = new Product();
