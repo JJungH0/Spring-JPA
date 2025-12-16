@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.ToString;
 
-@Entity
+//@Entity
 /**
  * 상속 전략 :
  * - SINGLE_TABLE (= 기본값)
