@@ -17,6 +17,7 @@ import org.hibernate.query.criteria.JpaSubQuery;
 import org.springframework.util.StringUtils;
 import study.jpa.jpabook.chap10.jpql.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
@@ -308,17 +309,17 @@ public class Main {
         member2.setAge(28);
 
         Product product1 = new Product();
-        product1.setPrice(20000);
+        product1.setPrice(BigDecimal.valueOf(20000));
         product1.setName("사과박스");
         product1.setStockAmount(200);
 
         Product product2 = new Product();
-        product2.setPrice(10000);
+        product2.setPrice(BigDecimal.valueOf(20000));
         product2.setName("감귤박스");
         product2.setStockAmount(200);
 
         Product product3 = new Product();
-        product3.setPrice(30000);
+        product3.setPrice(BigDecimal.valueOf(30000));
         product3.setName("바나나박스");
         product3.setStockAmount(200);
 

@@ -6,8 +6,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+
+import java.math.BigDecimal;
 
 @Entity @Getter @Setter
+@ToString
 public class Product {
 
     @Id @GeneratedValue
@@ -18,7 +22,7 @@ public class Product {
     private String name;
 
     @Column(name = "PRODUCT_PRICE")
-    private int price;
+    private BigDecimal price;
 
     @Column(name = "PRODUCT_STOCK_AMOUNT")
     private int stockAmount;
