@@ -22,6 +22,13 @@ import java.util.List;
 @SqlResultSetMapping(name = "memberWithOrderCount",
         entities = {@EntityResult(entityClass = Member.class)},
         columns = {@ColumnResult(name = "ORDER_COUNT")})
+@NamedStoredProcedureQuery(
+        name = "multiply",
+        procedureName = "proc_multiply",
+        parameters = {
+                @StoredProcedureParameter(name = "inParam", mode = ParameterMode.IN, type = Integer.class),
+                @StoredProcedureParameter(name = "outParam",mode = ParameterMode.OUT, type = Integer.class)}
+)
 public class Member {
 
     @Id
