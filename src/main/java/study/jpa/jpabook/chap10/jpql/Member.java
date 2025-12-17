@@ -15,10 +15,13 @@ import java.util.List;
 @ToString(exclude = "orders")
 @NamedQueries({
         @NamedQuery(name = "Member.findByName",
-        query = "SELECT m FROM Member m WHERE m.name = :paramName"),
+                query = "SELECT m FROM Member m WHERE m.name = :paramName"),
         @NamedQuery(name = "Member.count",
-        query = "SELECT COUNT(m) FROM Member m")
+                query = "SELECT COUNT(m) FROM Member m")
 })
+@SqlResultSetMapping(name = "memberWithOrderCount",
+        entities = {@EntityResult(entityClass = Member.class)},
+        columns = {@ColumnResult(name = "ORDER_COUNT")})
 public class Member {
 
     @Id
