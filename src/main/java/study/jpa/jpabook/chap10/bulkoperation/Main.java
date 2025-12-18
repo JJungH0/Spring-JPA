@@ -14,8 +14,8 @@ public class Main {
     static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");
     public static void main(String[] args) {
         save(emf.createEntityManager());
-        bulkUpdate(emf.createEntityManager());
-        bulkDelete(emf.createEntityManager());
+//        bulkUpdate(emf.createEntityManager());
+//        bulkDelete(emf.createEntityManager());
     }
 
     static void bulkDelete(EntityManager em) {
