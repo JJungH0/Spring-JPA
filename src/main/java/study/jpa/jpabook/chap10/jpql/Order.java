@@ -3,7 +3,7 @@ package study.jpa.jpabook.chap10.jpql;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
+//@Entity
 @Table(name = "ORDERS")
 @NoArgsConstructor
 @Builder
