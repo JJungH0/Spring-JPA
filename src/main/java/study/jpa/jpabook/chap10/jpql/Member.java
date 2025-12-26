@@ -9,7 +9,7 @@ import lombok.ToString;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+//@Entity
 @Getter
 @Setter
 @ToString(exclude = "orders")

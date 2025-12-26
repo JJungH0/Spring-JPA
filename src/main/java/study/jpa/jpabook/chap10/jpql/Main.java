@@ -50,10 +50,17 @@ public class Main {
 //        test5(emf.createEntityManager());
 //        test6(emf.createEntityManager());
 //        test7(emf.createEntityManager());
-        namedQuery(emf.createEntityManager());
+//        namedQuery(emf.createEntityManager());
+        namedQuery2(emf.createEntityManager());
 
     }
 
+    static void namedQuery2(EntityManager em) {
+        Member singleResult = em.createNamedQuery("Member.findByName", Member.class)
+                .setParameter("paramName", "junghwan")
+                .getSingleResult();
+        log.info("{}",singleResult);
+    }
     static void namedQuery(EntityManager em) {
         Member member = em.createNamedQuery("Member.findByName", Member.class)
                 .setParameter("paramName", "junghwan")
